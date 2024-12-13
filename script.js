@@ -1,6 +1,7 @@
 const fromElement = document.getElementById("from");
 const toElement = document.getElementById("to");
 const temperatureInput = document.getElementById("temp1");
+const resultElement = document.getElementById('result');
 
 function convertTemperature(event) {
     event.preventDefault();
@@ -9,12 +10,11 @@ function convertTemperature(event) {
     const temperature = parseFloat(temperatureInput.value);
 
     if (isNaN(temperature)) {
-        document.getElementById('result').innerText = "Invalid temperature value";
+        resultElement.innerText = "Invalid temperature value";
         return;
     }
 
     let result;
-
     if (from === "celsius") {
         if (to === "fahrenheit") {
             result = (temperature * 9 / 5) + 32;
@@ -40,10 +40,20 @@ function convertTemperature(event) {
     }
 
     if (result !== undefined) {
-        document.getElementById('result').innerText = `Resultant Temperature: ${result.toFixed(2)}`;
+        resultElement.innerText = `Resultant Temperature: ${result.toFixed(2)}`;
     }
+}
+
+function resetFields() {
+    fromElement.value = 'celsius';
+    toElement.value = 'celsius';
+    temperatureInput.value = '';
+    resultElement.innerText = '';
 }
 
 fromElement.addEventListener("change", convertTemperature);
 toElement.addEventListener("change", convertTemperature);
 temperatureInput.addEventListener("input", convertTemperature);
+
+const resetButton = document.getElementById('reset');
+resetButton.addEventListener("click", resetFields);
