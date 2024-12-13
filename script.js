@@ -10,7 +10,7 @@ function convertTemperature(event) {
     const temperature = parseFloat(temperatureInput.value);
 
     if (isNaN(temperature)) {
-        resultElement.innerText = "Invalid temperature value";
+        resultElement.innerText = "Enter The Temperature";
         return;
     }
 
@@ -37,9 +37,10 @@ function convertTemperature(event) {
 
     if (from === to) {
         result = temperature;
+        resultElement.innerHTML = `Temperature is already in ${from}`
     }
 
-    if (result !== undefined) {
+    if (result !== undefined && from !== to) {
         resultElement.innerText = `Resultant Temperature: ${result.toFixed(2)}`;
     }
 }
@@ -57,3 +58,4 @@ temperatureInput.addEventListener("input", convertTemperature);
 
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener("click", resetFields);
+
