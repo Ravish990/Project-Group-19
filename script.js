@@ -2,6 +2,7 @@ const fromElement = document.getElementById("from");
 const toElement = document.getElementById("to");
 const temperatureInput = document.getElementById("temp1");
 const resultElement = document.getElementById('result');
+const historyElement = document.getElementById("history");
 
 function updateOptions() {
     const fromValue = fromElement.value;
@@ -56,6 +57,21 @@ function convertTemperature(event) {
     }
 
     resultElement.innerText = `Resultant Temperature: ${result.toFixed(2)}`;
+     saveHistory( result.toFixed(2));
+}
+
+function saveHistory( result) {
+    const historyData = ` ${result}° `;
+    localStorage.setItem("lastHistory", historyData); 
+    displayHistory(); 
+
+}
+
+function displayHistory() {
+    const ishistory = localStorage.getItem("lastHistory");
+    if (ishistory) {
+        historyElement.innerText = `History: ${ishistory}`;
+    }
 }
 
 function resetFields() {
