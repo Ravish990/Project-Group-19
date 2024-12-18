@@ -1,14 +1,14 @@
-const fromElement = document.getElementById("from");
-const toElement = document.getElementById("to");
+const firstdropdownElement = document.getElementById("firstdropdown");
+const seconddropdownElement = document.getElementById("seconddropdown");
 const temperatureInput = document.getElementById("temp1");
 const resultElement = document.getElementById('result');
 const historyElement = document.getElementById("history");
 
 function updateOptions() {
-    const fromValue = fromElement.value;
-    const toValue = toElement.value;
-    const fromOptions = Array.from(fromElement.options);
-    const toOptions = Array.from(toElement.options);
+    const fromValue = firstdropdownElement.value;
+    const toValue = seconddropdownElement.value;
+    const fromOptions = Array.from(firstdropdownElement.options);
+    const toOptions = Array.from(seconddropdownElement.options);
 
     fromOptions.forEach(option => {
         option.disabled = option.value === toValue;
@@ -17,18 +17,16 @@ function updateOptions() {
     toOptions.forEach(option => {
         option.disabled = option.value === fromValue;
     });
-
-    saveButton.disabled = fromValue === toValue;
     
-    if (fromElement.value === toValue) {
-        toElement.value = toOptions.find(option => !option.disabled).value;
+    if (firstdropdownElement.value === toValue) {
+        seconddropdownElement.value = toOptions.find(option => !option.disabled).value;
     }
 }
 
 function convertTemperature(event) {
     event.preventDefault();
-    const from = fromElement.value;
-    const to = toElement.value;
+    const from = firstdropdownElement.value;
+    const to = seconddropdownElement.value;
     const temperature = parseFloat(temperatureInput.value);
 
     if (isNaN(temperature)) {
@@ -38,7 +36,7 @@ function convertTemperature(event) {
 
     let result;
     if (from === "celsius") {
-        if (to === "fahrenheit") {
+        if(to === "fahrenheit") {
             result = (temperature * 9 / 5) + 32;
         } else if (to === "kelvin") {
             result = temperature + 273.15;
@@ -52,7 +50,8 @@ function convertTemperature(event) {
     } else if (from === "kelvin") {
         if (to === "celsius") {
             result = temperature - 273.15;
-        } else if (to === "fahrenheit") {
+        } 
+        else if (to === "fahrenheit") {
             result = (temperature - 273.15) * 9 / 5 + 32;
         }
     }
@@ -75,29 +74,25 @@ function displayHistory() {
     }
 }
 
-
 function resetFields() {
-    fromElement.value = 'celsius';
-    toElement.value = 'fahrenheit';
+    firstdropdownElement.value = 'celsius';
+    seconddropdownElement.value = 'fahrenheit';
     temperatureInput.value = '';
-    resultElement.innerText = 'Resultant Temperature';
-    saveButton.disabled = true;
+    resultElement.innerText = '';
     updateOptions();
 }
 
-fromElement.addEventListener("change", () => {
+firstdropdownElement.addEventListener("change", () => {
     updateOptions();
-    convertTemperature(event);
+    convertTemperature();
 });
-toElement.addEventListener("change", () => {
+seconddropdownElement.addEventListener("change", () => {
     updateOptions();
-    convertTemperature(event);
+    convertTemperature();
 });
 temperatureInput.addEventListener("input", convertTemperature);
-saveButton.addEventListener("click", saveHistory);
 
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener("click", resetFields);
-
 updateOptions();
 
