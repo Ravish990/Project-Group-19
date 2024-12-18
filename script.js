@@ -81,10 +81,16 @@ function displayHistory() {
     const history = JSON.parse(localStorage.getItem("temperatureHistory")) || [];
     if (history.length > 0) {
         historyElement.innerHTML = `History: <br/>${history.join('<br/>')}`;
+        setTimeout(() => {
+            historyElement.innerText = "History: ";
+        }, 5000);
     } else {
         historyElement.innerText = "History: No conversions yet";
     }
 }
+
+
+
 
 function resetFields() {
     fromElement.value = 'celsius';
