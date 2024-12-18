@@ -89,9 +89,6 @@ function displayHistory() {
     }
 }
 
-
-
-
 function resetFields() {
     fromElement.value = 'celsius';
     toElement.value = 'fahrenheit';
@@ -99,6 +96,17 @@ function resetFields() {
     resultElement.innerText = 'Resultant Temperature';
     saveButton.disabled = true;
     updateOptions();
+}
+
+function validateTemperatureInput(event) {
+    const value = event.target.value;
+    const validInput = /^-?\d*\.?\d*$/;
+    if (!validInput.test(value)) {
+        resultElement.innerText = "Please enter a valid number";
+        temperatureInput.value = value.slice(0, -1);
+    } else {
+        resultElement.innerText = "";
+    }
 }
 
 fromElement.addEventListener("change", () => {
@@ -109,6 +117,7 @@ toElement.addEventListener("change", () => {
     updateOptions();
     convertTemperature(event);
 });
+temperatureInput.addEventListener("input", validateTemperatureInput);
 temperatureInput.addEventListener("input", convertTemperature);
 saveButton.addEventListener("click", saveHistory);
 
@@ -116,4 +125,3 @@ const resetButton = document.getElementById('reset');
 resetButton.addEventListener("click", resetFields);
 
 updateOptions();
-
