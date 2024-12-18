@@ -3,7 +3,6 @@ const toElement = document.getElementById("to");
 const temperatureInput = document.getElementById("temp1");
 const resultElement = document.getElementById('result');
 const historyElement = document.getElementById("history");
-const saveButton = document.getElementById('save');
 
 function updateOptions() {
     const fromValue = fromElement.value;
@@ -59,37 +58,22 @@ function convertTemperature(event) {
     }
 
     resultElement.innerText = `Resultant Temperature: ${result.toFixed(2)}`;
-    saveButton.disabled = from === to;
+    saveHistory( result.toFixed(2));
 }
 
-function saveHistory() {
-    const result = resultElement.innerText;
-    if (result && result !== "Resultant Temperature") {
-        let history = JSON.parse(localStorage.getItem("temperatureHistory")) || [];
-        
-        if (history.length >= 5) {
-            history.pop(); 
-        }
-        
-        history.unshift(result); 
-        localStorage.setItem("temperatureHistory", JSON.stringify(history));
-        displayHistory();
-    }
+function saveHistory( result) {
+    const historyData = ` ${result}° `;
+    localStorage.setItem("lastHistory", historyData); 
+    displayHistory(); 
+
 }
 
 function displayHistory() {
-    const history = JSON.parse(localStorage.getItem("temperatureHistory")) || [];
-    if (history.length > 0) {
-        historyElement.innerHTML = `History: <br/>${history.join('<br/>')}`;
-        setTimeout(() => {
-            historyElement.innerText = "History: ";
-        }, 5000);
-    } else {
-        historyElement.innerText = "History: No conversions yet";
+    const ishistory = localStorage.getItem("lastHistory");
+    if (ishistory) {
+        historyElement.innerText = `History: ${ishistory}`;
     }
 }
-
-
 
 
 function resetFields() {
