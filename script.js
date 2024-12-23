@@ -5,29 +5,27 @@ const resultElement = document.getElementById('result');
 const historyElement = document.getElementById("history");
 const saveButton = document.getElementById('save');
 
+const temperatureUnits = ["celsius", "fahrenheit", "kelvin"];
+
 function updateOptions() {
-    const fromValue = fromElement.value;
-    const toValue = toElement.value;
-    const fromOptions = Array.from(fromElement.options);
-    const toOptions = Array.from(toElement.options);
+    const from = fromElement.value; 
+    toElement.innerHTML = '';  
 
-    fromOptions.forEach(option => {
-        option.disabled = option.value === toValue;
+    temperatureUnits.forEach(unit => {
+        if (unit !== from) {  
+            const option = document.createElement("option");
+            option.value = unit;
+            option.textContent = unit.charAt(0).toUpperCase() + unit.slice(1);  
+            toElement.appendChild(option);
+        }
     });
 
-    toOptions.forEach(option => {
-        option.disabled = option.value === fromValue;
-    });
-
-    saveButton.disabled = fromValue === toValue;
-    
-    if (fromElement.value === toValue) {
-        toElement.value = toOptions.find(option => !option.disabled).value;
-    }
+    convertTemperature();  
 }
 
 function convertTemperature(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();  
+    
     const from = fromElement.value;
     const to = toElement.value;
     const temperature = parseFloat(temperatureInput.value);
@@ -59,7 +57,7 @@ function convertTemperature(event) {
     }
 
     resultElement.innerText = `Resultant Temperature: ${result.toFixed(2)}`;
-    saveButton.disabled = from === to;
+    saveButton.disabled = from === to;  
 }
 
 function saveHistory() {
@@ -68,10 +66,10 @@ function saveHistory() {
         let history = JSON.parse(localStorage.getItem("temperatureHistory")) || [];
         
         if (history.length >= 5) {
-            history.pop(); 
+            history.pop();
         }
         
-        history.unshift(result); 
+        history.unshift(result);  
         localStorage.setItem("temperatureHistory", JSON.stringify(history));
         displayHistory();
     }
@@ -83,7 +81,7 @@ function displayHistory() {
         historyElement.innerHTML = `History: <br/>${history.join('<br/>')}`;
         setTimeout(() => {
             historyElement.innerText = "History: ";
-        }, 5000);
+        }, 5000); 
     } else {
         historyElement.innerText = "History: No conversions yet";
     }
@@ -103,20 +101,14 @@ function validateTemperatureInput(event) {
     const validInput = /^-?\d*\.?\d*$/;
     if (!validInput.test(value)) {
         resultElement.innerText = "Please enter a valid number";
-        temperatureInput.value = value.slice(0, -1);
+        temperatureInput.value = value.slice(0, -1);  
     } else {
         resultElement.innerText = "";
     }
 }
 
-fromElement.addEventListener("change", () => {
-    updateOptions();
-    convertTemperature(event);
-});
-toElement.addEventListener("change", () => {
-    updateOptions();
-    convertTemperature(event);
-});
+fromElement.addEventListener("change", updateOptions);
+toElement.addEventListener("change", convertTemperature);
 temperatureInput.addEventListener("input", validateTemperatureInput);
 temperatureInput.addEventListener("input", convertTemperature);
 saveButton.addEventListener("click", saveHistory);
