@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <link rel="stylesheet" href="length.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Length Converter</h1>
+        <div class="converter">
+            <label for="from">From</label>
+            <select id="from">
+                <option value="meter">meter</option>
+                <option value="centimeter">centimeter</option>
+                <option value="kilometer">kilometer</option>
+            </select>
+            <label for="to">To</label>
+            <select id="to">
+                <option value="meter">meter</option>
+                <option value="centimeter">centimeter</option>
+                <option value="kilometer">kilometer</option>
+            </select>
+            <label for="value">Enter the value here</label>
+            <input type="text" id="length" placeholder="Enter length">
+            <button id="save" disabled>Save to History</button>
+            <button id="reset">Reset</button>
+            <div id="result">Resultant Length</div>
+            <div id="history">History</div>
+        </div>
+    </div>
+    <script src="length.js"></script>
+</body>
+</html>
