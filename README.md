@@ -40,13 +40,14 @@ To get a local copy of the project up and running, follow these steps.
    ```bash
    git clone https://github.com/Ravish990/Project-Group-19.git
 
-2.Open index.html in your web browser.
+ 2.Open index.html in your web browser.
 ### Usage
 ### Temperature Converter:
 Navigate to temp.html to use the temperature converter.
 Select the units to convert from and to, enter the value, and view the conversion result.
 Use the reset button to clear all fields and results.
-Length Converter:
+
+### Length Converter:
 Navigate to length.html to use the length converter.
 Select the units to convert from and to, enter the value, and view the conversion result.
 Use the reset button to clear all fields and results.
