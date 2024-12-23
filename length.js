@@ -60,6 +60,7 @@ function convertLength(event) {
     }
 
     resultElement.innerText = `Resultant Length: ${result.toFixed(2)}`;
+    saveButton.disabled = false;
 }
 
 function saveHistory() {
@@ -81,13 +82,18 @@ function displayHistory() {
     const history = JSON.parse(localStorage.getItem("lengthHistory")) || [];
     if (history.length > 0) {
         historyElement.innerHTML = `History: <br/>${history.join('<br/>')}`;
-        setTimeout(() => {
-            historyElement.innerText = "History: ";
-        }, 5000);
+        historyElement.style.display = "block"; 
     } else {
         historyElement.innerText = "History: No conversions yet";
+        historyElement.style.display = "block"; 
     }
+
+    
+    setTimeout(() => {
+        historyElement.style.display = "none";
+    }, 5000); 
 }
+
 
 function resetFields() {
     fromElement.value = 'meter';
@@ -117,4 +123,3 @@ saveButton.addEventListener("click", saveHistory);
 resetButton.addEventListener("click", resetFields);
 
 updateOptions();
-displayHistory();
