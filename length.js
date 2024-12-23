@@ -6,25 +6,23 @@ const historyElement = document.getElementById("history");
 const saveButton = document.getElementById("save");
 const resetButton = document.getElementById("reset");
 
+
+const temperatureUnits = ["meter", "centimeter", "kilometer"];
+
 function updateOptions() {
-    const fromValue = fromElement.value;
-    const toValue = toElement.value;
-    const fromOptions = Array.from(fromElement.options);
-    const toOptions = Array.from(toElement.options);
+    const from = fromElement.value; 
+    toElement.innerHTML = '';  
 
-    fromOptions.forEach(option => {
-        option.disabled = option.value === toValue;
+    temperatureUnits.forEach(unit => {
+        if (unit !== from) {  
+            const option = document.createElement("option");
+            option.value = unit;
+            option.textContent = unit.charAt(0).toUpperCase() + unit.slice(1);  
+            toElement.appendChild(option);
+        }
     });
 
-    toOptions.forEach(option => {
-        option.disabled = option.value === fromValue;
-    });
-
-    saveButton.disabled = fromValue === toValue;
-
-    if (fromElement.value === toValue) {
-        toElement.value = toOptions.find(option => !option.disabled).value;
-    }
+    convertLength();  
 }
 
 function convertLength(event) {
