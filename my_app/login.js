@@ -31,7 +31,7 @@ subBtn.addEventListener("click", (event) => {
 
 goToTempConverterBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    window.location.href = 'index.html'; 
+    window.location.href = 'temp.html'; 
 });
 
 goToLengthConverterBtn.addEventListener("click", (event) => {
