@@ -8,10 +8,23 @@ const optionsDiv = document.getElementById("options");
 const goToTempConverterBtn = document.getElementById("goToTempConverter");
 const goToLengthConverterBtn = document.getElementById("goToLengthConverter");
 
+// Check if user is already registered
+if (localStorage.getItem("isRegistered")) {
+    formDetails.style.display = "none";
+    optionsDiv.style.display = "block";
+}
+
 subBtn.addEventListener("click", (event) => {
     event.preventDefault();
     alert("User Registered");
     console.log("User Registered");
+
+    localStorage.setItem("username", username.value);
+    localStorage.setItem("email", useremail.value);
+    localStorage.setItem("number", usernumber.value);
+    localStorage.setItem("password", userpass.value);
+    localStorage.setItem("isRegistered", true);
+
     formDetails.style.display = "none"; 
     optionsDiv.style.display = "block"; 
 });

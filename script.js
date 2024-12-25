@@ -4,6 +4,8 @@ const temperatureInput = document.getElementById("temp1");
 const resultElement = document.getElementById('result');
 const historyElement = document.getElementById("history");
 const saveButton = document.getElementById('save');
+const resetButton = document.getElementById('reset');
+const swapButton = document.getElementById('swap');
 
 const temperatureUnits = ["celsius", "fahrenheit", "kelvin"];
 
@@ -12,15 +14,24 @@ function updateOptions() {
     toElement.innerHTML = '';  
 
     temperatureUnits.forEach(unit => {
-        if (unit !== from) {  
-            const option = document.createElement("option");
-            option.value = unit;
-            option.textContent = unit.charAt(0).toUpperCase() + unit.slice(1);  
-            toElement.appendChild(option);
+        const option = document.createElement("option");
+        option.value = unit;
+        option.textContent = unit.charAt(0).toUpperCase() + unit.slice(1);  
+        if (unit === from) {
+            option.disabled = true; // Disable the same unit in the "to" selector
         }
+        toElement.appendChild(option);
     });
 
     convertTemperature();  
+}
+
+function swapUnits() {
+    const fromValue = fromElement.value;
+    const toValue = toElement.value;
+    fromElement.value = toValue;
+    updateOptions();
+    toElement.value = fromValue;
 }
 
 function convertTemperature(event) {
@@ -112,8 +123,7 @@ toElement.addEventListener("change", convertTemperature);
 temperatureInput.addEventListener("input", validateTemperatureInput);
 temperatureInput.addEventListener("input", convertTemperature);
 saveButton.addEventListener("click", saveHistory);
-
-const resetButton = document.getElementById('reset');
 resetButton.addEventListener("click", resetFields);
+swapButton.addEventListener("click", swapUnits);
 
 updateOptions();

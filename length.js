@@ -5,7 +5,7 @@ const resultElement = document.getElementById("result");
 const historyElement = document.getElementById("history");
 const saveButton = document.getElementById("save");
 const resetButton = document.getElementById("reset");
-
+const swapButton = document.getElementById("swap");
 
 const temperatureUnits = ["meter", "centimeter", "kilometer"];
 
@@ -14,19 +14,28 @@ function updateOptions() {
     toElement.innerHTML = '';  
 
     temperatureUnits.forEach(unit => {
-        if (unit !== from) {  
-            const option = document.createElement("option");
-            option.value = unit;
-            option.textContent = unit.charAt(0).toUpperCase() + unit.slice(1);  
-            toElement.appendChild(option);
+        const option = document.createElement("option");
+        option.value = unit;
+        option.textContent = unit.charAt(0).toUpperCase() + unit.slice(1);  
+        if (unit === from) {
+            option.disabled = true; // Disable the same unit in the "to" selector
         }
+        toElement.appendChild(option);
     });
 
     convertLength();  
 }
 
+function swapUnits() {
+    const fromValue = fromElement.value;
+    const toValue = toElement.value;
+    fromElement.value = toValue;
+    updateOptions();
+    toElement.value = fromValue;
+}
+
 function convertLength(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     const from = fromElement.value;
     const to = toElement.value;
     const length = parseFloat(lengthInput.value);
@@ -92,7 +101,6 @@ function displayHistory() {
     }, 5000); 
 }
 
-
 function resetFields() {
     fromElement.value = 'meter';
     toElement.value = 'centimeter';
@@ -119,5 +127,6 @@ lengthInput.addEventListener("input", validateLengthInput);
 lengthInput.addEventListener("input", convertLength);
 saveButton.addEventListener("click", saveHistory);
 resetButton.addEventListener("click", resetFields);
+swapButton.addEventListener("click", swapUnits);
 
 updateOptions();

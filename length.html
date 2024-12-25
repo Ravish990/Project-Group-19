@@ -4,35 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Length Converter</title>
-    <link rel="stylesheet" href="length.css">
-    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-links"> 
-        <a href="index.html">Go to Temperature Converter</a> </div>
+    <div class="top-links">
+        <a href="index.html">Go to temperature converter</a>
+    </div>
     <div class="container">
         <h1>Length Converter</h1>
         <div class="converter">
-            <label for="from">From</label>
-            <select id="from">
-                <option value="meter">meter</option>
-                <option value="centimeter">centimeter</option>
-                <option value="kilometer">kilometer</option>
-            </select>
-            <label for="to">To</label>
-            <select id="to">
-                <option value="meter">meter</option>
-                <option value="centimeter">centimeter</option>
-                <option value="kilometer">kilometer</option>
-            </select>
-            <label for="value">Enter the value here</label>
-            <input type="text" id="length" placeholder="Enter length">
-            <button id="save" disabled>Save to History</button>
-            <button id="reset">Reset</button>
-            <div id="result">Resultant Length</div>
-            <div id="history" style="display: none;">History</div>
+            
+            <div class="input-group">
+                <label class="label" for="from">From</label>
+                <select id="from" class="unit-select">
+                    <option value="meter">Meter</option>
+                    <option value="centimeter">Centimeter</option>
+                    <option value="kilometer">Kilometer</option>
+                </select>
+            </div>
+            <button id="swap" class="swap-button">↔</button>
+            <div class="input-group">
+                <label class="label" for="to">To</label>
+                <select id="to" class="unit-select">
+                    <option value="centimeter">Centimeter</option>
+                    <option value="kilometer">Kilometer</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label class="label" for="length">Length</label>
+                <input type="text" id="length" class="length-input" placeholder="Enter length" />
+            </div>
+            <div id="result" class="result">Resultant Length</div>
+            <button id="save" class="action-button" disabled>Save</button>
+            <button id="reset" class="action-button">Reset</button>
+            <div id="history" class="history">History: No conversions yet</div>
         </div>
     </div>
+
     <script src="length.js"></script>
 </body>
 </html>

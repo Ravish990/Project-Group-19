@@ -3,36 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>User Registration</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="login">
-        <form class="Form">
-            <h1>Login Form</h1>
-            <label for="username">Name:</label>
-            <br><br>
-            <input type="text" placeholder="Enter your good name" id="username" required>
-            <br><br>
-            <label for="email">Enter the email:</label>
-            <br><br>
-            <input type="email" placeholder="Enter the email" id="email" required>
-            <br><br>
-            <label for="number">Number:</label>
-            <br><br>
-            <input type="tel" placeholder="Enter your phone number" id="number" required>
-            <br><br>
-            <label for="password">Password:</label>
-            <br><br>
-            <input type="password" placeholder="Enter the password" id="password" required>
-            <br><br><br>
-            <button id="sub">Submit</button>
-        </form>
-        <div id="options" style="display: none;">
-            <button id="goToTempConverter">Go to Temperature Converter</button>
-            <button id="goToLengthConverter">Go to Length Converter</button>
-        </div>
+    <div class="Form">
+        <h1>Register</h1>
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="number">Phone Number:</label>
+        <input type="text" id="number" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button id="sub">Register</button>
     </div>
-    <script defer src="login.js"></script>
+    <div id="options" style="display:none;">
+        <h1>Welcome!</h1>
+        <button id="goToTempConverter">Go to Temperature Converter</button>
+        <button id="goToLengthConverter">Go to Length Converter</button>
+    </div>
+    <script src="login.js"></script>
 </body>
 </html>

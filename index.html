@@ -5,32 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temperature Converter</title>
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
     <div class="top-links"> 
-    <a href="length.html">Go to Length Converter</a> </div>
+        <a href="length.html">Go to Length Converter</a>
+    </div>
     <div class="container">
         <h1>Temperature Converter</h1>
         <div class="converter">
-            <label for="from">From</label>
-            <select id="from">
-                <option value="celsius">Celsius</option>
-                <option value="fahrenheit">Fahrenheit</option>
-                <option value="kelvin">Kelvin</option>
-            </select>
-            <label for="to">To</label>
-            <select id="to">
-                <option value="celsius">Celsius</option>
-                <option value="fahrenheit">Fahrenheit</option>
-                <option value="kelvin">Kelvin</option>
-            </select>
-            <label for="value">Enter the value here</label>
-            <input type="text" id="temp1" placeholder="Enter temperature">
-            <button id="save" disabled>Save to History</button>
-            <button id="reset">Reset</button>
-            <div id="result">Resultant Temperature</div>
-            <div id="history">History</div>
+            <div class="input-group">
+                <label class="label" for="from">From</label>
+                <select id="from" class="unit-select">
+                    <option value="celsius">Celsius</option>
+                    <option value="fahrenheit">Fahrenheit</option>
+                    <option value="kelvin">Kelvin</option>
+                </select>
+            </div>
+            <button id="swap" class="swap-button">↔</button>
+            <div class="input-group">
+                <label class="label" for="to">To</label>
+                <select id="to" class="unit-select">
+                    <option value="celsius">Celsius</option>
+                    <option value="fahrenheit">Fahrenheit</option>
+                    <option value="kelvin">Kelvin</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label class="label" for="temp1">Enter the value here</label>
+                <input type="text" id="temp1" class="length-input" placeholder="Enter temperature">
+            </div>
+            <button id="save" class="action-button" disabled>Save to History</button>
+            <button id="reset" class="action-button">Reset</button>
+            <div id="result" class="result">Resultant Temperature</div>
+            <div id="history" class="history">History: No conversions yet</div>
         </div>
     </div>
     <script src="script.js"></script>
